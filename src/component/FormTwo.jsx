@@ -9,6 +9,9 @@ export default function FormTwo({ setStep }) {
     const [specialRequest, setSpecialRequest] = useState('');
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [name, setName] = useState('');
+    const [emailError, setEmailError] = useState(false);
+
+    const [nameError, setNameError] = useState(false);
 
     const fileInputRef = useRef(null);
 
@@ -16,23 +19,39 @@ export default function FormTwo({ setStep }) {
         fileInputRef.current.click(); // Triggers the file input
     };
 
-    const handleNext = () => {
-        if (!name.trim() || !email.trim()) {
-            alert('Please fill in both name and email fields');
-            return setStep(2);
+    const handleNext = (event) => {
+        event.preventDefault(); // Prevent form submission
+    
+        let hasError = false;
+    
+        if (!name.trim()) {
+            setNameError(true);
+            hasError = true;
+        } else {
+            setNameError(false);
         }
-
+    
+        if (!email.trim()) {
+            setEmailError(true);
+            hasError = true;
+        } else {
+            setEmailError(false);
+        }
+    
+        if (hasError) return; // Stop navigation if validation fails
+    
         const formData = {
             name,
             email,
             specialRequest,
-            profilePhoto: profilePhoto ? profilePhoto : null
+            profilePhoto: profilePhoto || null,
         };
-        console.log(formData);
-        localStorage.setItem('ticketFormData', JSON.stringify(formData));
-
-        setStep(3);
+        localStorage.setItem("ticketFormData", JSON.stringify(formData));
+    
+        setStep(3); // Move to FormTwo
     };
+    
+    
 
     const handlePrevious = () => {
         setStep(1);
@@ -112,6 +131,10 @@ export default function FormTwo({ setStep }) {
                     className="mt-3 w-full bg-[#052228] border border-[#197686] rounded-xl p-3 roboto-font text-white" 
                     onChange={(e) => setName(e.target.value)}
                 />
+
+                {nameError && (
+                    <p className="text-red-700">name field is required</p>
+                )}
             </div>
 
             <div className="my-8 roboto-font">
@@ -125,6 +148,9 @@ export default function FormTwo({ setStep }) {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
+                {emailError && (
+                    <p className="text-red-700">Email field is required</p>
+                )}
             </div>
 
             <div className="my-8 roboto-font">
