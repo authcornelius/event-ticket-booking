@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@font-face {
+  font-family: 'JejuMyeongjo';
+  src: url('./assets/fonts/JejuMyeongjo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RoadRage';
+  src: url('./assets/fonts/RoadRage-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+body {
+  background: linear-gradient(175deg, #02191D 50%, #0E464F 120%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.jeju-font {
+  font-family: 'JejuMyeongjo', sans-serif;
+}
+.roboto-font {
+  font-family: 'Roboto', sans-serif;
+}
+.road-rage-font {
+  font-family: 'RoadRage', sans-serif;
+}
+
+
+progress {
+  width: 100%;
+  height: 4px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #0E464F;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #24A0B5;
+  border-radius: 10px;
+}
+
+progress::-moz-progress-bar {
+  background-color: #24A0B5;
+  border-radius: 10px;
+}
+
+
+.gradient-background {
+  background: radial-gradient(57.42% 106.59% at 14.02% 32.06%, rgba(36, 160, 181, 0.20) 0%, rgba(36, 160, 181, 0.00) 100%), rgba(10, 12, 17, 0.10);
+}
