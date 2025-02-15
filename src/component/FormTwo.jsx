@@ -89,6 +89,7 @@ export default function FormTwo({ setStep }) {
                 setProfilePhoto(data.secure_url);
                 setUploadSuccess(true);
                 setUploading(false);
+                setImageError(false)
                 console.log('Uploaded image URL:', data);
             } catch (error) {
                 console.log('Upload error:', error);

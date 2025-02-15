@@ -38,7 +38,6 @@ useEffect(() => {
 }, []);
 
 const handleDownload = async () => {
-  console.log('Starting Download...');
 
   const ticketElement = ticketRef.current;
   if (!ticketElement) {
