@@ -9,6 +9,7 @@ export default function FormTwo({ setStep }) {
     const [email, setEmail] = useState('');
     const [specialRequest, setSpecialRequest] = useState('');
     const [profilePhoto, setProfilePhoto] = useState(null);
+    const [viewProfilePhoto, setViewProfilePhoto] = useState(false);
     const [name, setName] = useState('');
     
     const [nameError, setNameError] = useState(false);
@@ -117,21 +118,30 @@ export default function FormTwo({ setStep }) {
                     <div className="my-2.5">
                         <div className="lg:bg-[#00000033] lg:h-48 lg:my-10 lg:relative">
                             <div className="flex flex-col justify-center items-center">
-                                <div 
-                                    className="cursor-pointer border-2 w-60 h-60 bg-[#0E464F] border-[#24A0B580] rounded-4xl flex flex-col space-y-5 justify-center items-center lg:absolute lg:top-24 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2"
-                                    onClick={handleDivClick}
-                                >
-                                    <img src={DownloadIcon} alt="download" />
-                                    <p className="text-white">Drag & drop or click to upload</p>
-                                </div>
-
-                                <input 
-                                    type="file" 
-                                    ref={fileInputRef} 
-                                    className="hidden" 
-                                    onChange={handleFileChange}
-                                    accept="image/*" // Restrict to images
-                                />
+                                {profilePhoto ? (
+                                    <div 
+                                        className="cursor-pointer border-2 w-60 h-60 bg-[#0E464F] border-[#24A0B580] rounded-4xl flex flex-col space-y-5 justify-center items-center lg:absolute lg:top-24 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2"
+                                    >
+                                        <img src={profilePhoto} alt="uploaded" className="w-full h-full object-cover rounded-4xl"/>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div 
+                                            className="cursor-pointer border-2 w-60 h-60 bg-[#0E464F] border-[#24A0B580] rounded-4xl flex flex-col space-y-5 justify-center items-center lg:absolute lg:top-24 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2"
+                                            onClick={handleDivClick}
+                                        >
+                                            <img src={DownloadIcon} alt="download" />
+                                            <p className="text-white">Drag & drop or click to upload</p>
+                                        </div>
+                                        <input 
+                                            type="file" 
+                                            ref={fileInputRef} 
+                                            className="hidden" 
+                                            onChange={handleFileChange}
+                                            accept="image/*"
+                                        />
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
