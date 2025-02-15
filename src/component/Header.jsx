@@ -19,7 +19,7 @@ function Header() {
         },
     ]
   return (
-    <div className="px-5 lg:px-40 py-5 ">
+    <div className="px-5 lg:px-40 py-5 fixed top-0 left-0 right-0 z-10 backdrop-blur-sm">
         <div className="py-3 border border-[#197686] rounded-3xl px-5 flex justify-between items-center">
             <Link to="/">
                 <img src={Logo} alt="logo" />
