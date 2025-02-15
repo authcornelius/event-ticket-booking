@@ -90,7 +90,6 @@ export default function FormTwo({ setStep }) {
                 setUploadSuccess(true);
                 setUploading(false);
                 setImageError(false)
-                console.log('Uploaded image URL:', data);
             } catch (error) {
                 console.log('Upload error:', error);
             }
