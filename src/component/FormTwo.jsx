@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import DownloadIcon from '/cloud-download.png'
 import { FaRegEnvelope } from "react-icons/fa";
 import PropTypes from "prop-types";
+import { SiVerizon } from "react-icons/si";
 
 
 export default function FormTwo({ setStep }) {
@@ -9,9 +10,13 @@ export default function FormTwo({ setStep }) {
     const [specialRequest, setSpecialRequest] = useState('');
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [name, setName] = useState('');
-    const [emailError, setEmailError] = useState(false);
-
+    
     const [nameError, setNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+    const [uploading, setUploading] = useState(false);
+    const [uploadSuccess, setUploadSuccess] = useState(false);
 
     const fileInputRef = useRef(null);
 
@@ -29,13 +34,20 @@ export default function FormTwo({ setStep }) {
             hasError = true;
         } else {
             setNameError(false);
-        }
+        } 
     
         if (!email.trim()) {
             setEmailError(true);
             hasError = true;
         } else {
             setEmailError(false);
+        }
+
+        if (!profilePhoto) {
+            setImageError(true);
+            hasError = true;
+        } else {
+            setImageError(false);
         }
     
         if (hasError) return; // Stop navigation if validation fails
@@ -58,6 +70,7 @@ export default function FormTwo({ setStep }) {
     };
 
     const handleFileChange = async (event) => {
+        setUploading(true);
         const file = event.target.files[0];
         if (file) {
             const formData = new FormData();
@@ -74,6 +87,8 @@ export default function FormTwo({ setStep }) {
                 );
                 const data = await response.json();
                 setProfilePhoto(data.secure_url);
+                setUploadSuccess(true);
+                setUploading(false);
                 console.log('Uploaded image URL:', data);
             } catch (error) {
                 console.log('Upload error:', error);
@@ -120,6 +135,21 @@ export default function FormTwo({ setStep }) {
                             </div>
                         </div>
                     </div>
+
+                    {uploading && (
+                        <p className="text-white text-center">Uploading....</p>
+                    )}
+
+                    {uploadSuccess && (
+                        <div className="flex justify-center items-center space-x-2">
+                            <p className="text-[#147c6e] font-semibold">Upload Successful</p>
+                            <SiVerizon color="#147c6e" size={20} />
+                        </div>
+                    )}
+
+                    {imageError && (
+                        <p className="text-red-700">image is required</p>
+                    )}
                 </div>
             </div>
 

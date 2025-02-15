@@ -4,10 +4,16 @@ import { useState } from "react";
 
 export default function FormOne({ setStep}) {
 
-    const [selectedTicket, setSelectedTicket] = useState('Regular Access');
+    const [selectedTicket, setSelectedTicket] = useState('');
     const [selectedNumber, setSelectedNumber] = useState('1');
 
+    const [ticketError, setTicketError] = useState(false);
+
     const handleNext = () => {
+        if (!selectedTicket) {
+            setTicketError(true);
+            return;
+        }
         // Store the ticket data in localStorage
         const ticketData = {
             ticketType: selectedTicket,
@@ -92,6 +98,9 @@ export default function FormOne({ setStep}) {
                             </div>
                         ))}
                     </div>
+                    {ticketError && (
+                        <p className="text-red-500 text-sm mt-2">Please select a ticket type.</p>
+                    )}
                 </div>
             </div>
 
